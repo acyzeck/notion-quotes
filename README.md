@@ -1,4 +1,4 @@
-# Notion Embeded Quotes
+# Notion Embedded Quotes
 
 A minimalist, elegant quote generator featuring Japanese photography and creativity-related expressions. Built specifically for embedding in Notion pages.
 
