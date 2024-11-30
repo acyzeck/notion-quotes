@@ -2,6 +2,8 @@
 
 A minimalist, elegant quote generator featuring Japanese photography and creativity-related expressions. Built specifically for embedding in Notion pages.
 
+![Demo](demo.png)
+
 ## 🔗 Live Demo
 https://danhilse.github.io/notion-quotes/
 
