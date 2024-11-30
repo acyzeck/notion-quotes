@@ -1,4 +1,4 @@
-# Japanese Photography Quotes Generator
+# Notion Embeded Quotes
 
 A minimalist, elegant quote generator featuring Japanese photography and creativity-related expressions. Built specifically for embedding in Notion pages.
 
