@@ -1,0 +1,85 @@
+// index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion Quote Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        .quote-container {
+            padding: 1rem;
+            background-color: rgb(247, 247, 247);
+            border-radius: 0.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 0.75rem;
+            max-width: 100%;
+            margin: 0;
+        }
+        .emoji {
+            font-size: 1.5rem;
+        }
+        .quote-content {
+            flex: 1;
+        }
+        .quote-text {
+            margin: 0 0 0.5rem 0;
+            color: rgb(55, 53, 47);
+            line-height: 1.5;
+        }
+        .quote-author {
+            margin: 0;
+            color: rgb(120, 119, 116);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container">
+        <div class="emoji">💭</div>
+        <div class="quote-content">
+            <p class="quote-text" id="quote-text"></p>
+            <p class="quote-author" id="quote-author"></p>
+        </div>
+    </div>
+
+    <script>
+        const quotes = [
+            {
+                text: "First, solve the problem. Then, write the code.",
+                author: "John Johnson"
+            },
+            {
+                text: "Make it work, make it right, make it fast.",
+                author: "Kent Beck"
+            },
+            {
+                text: "Simplicity is prerequisite for reliability.",
+                author: "Edsger W. Dijkstra"
+            },
+            {
+                text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+                author: "Martin Fowler"
+            },
+            {
+                text: "The best way to predict the future is to invent it.",
+                author: "Alan Kay"
+            }
+        ];
+
+        function setRandomQuote() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quote-text').textContent = randomQuote.text;
+            document.getElementById('quote-author').textContent = `— ${randomQuote.author}`;
+        }
+
+        // Set initial quote
+        setRandomQuote();
+    </script>
+</body>
+</html>
