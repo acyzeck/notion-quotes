@@ -41,22 +41,6 @@ Alternatively, you can use a timestamp:
 https://danhilse.github.io/notion-quotes/?t=20231130
 ```
 
-## 🛠️ Setup for Development
-
-1. Clone the repository:
-```bash
-git clone https://github.com/danhilse/notion-quotes.git
-cd notion-quotes
-```
-
-2. Deploy to GitHub Pages:
-   - Go to repository Settings
-   - Navigate to Pages section
-   - Set source to `main` branch
-   - Save
-
-3. Your quote generator will be available at `https://danhilse.github.io/notion-quotes/`
-
 ## ✨ Customization
 
 ### Adding New Quotes
@@ -79,9 +63,3 @@ All styles are contained in the `<style>` section of `index.html`. The design us
 - Noto Sans JP for phonetic and translations
 - Minimal color palette
 - Fade-in animations
-
-## 📄 License
-MIT
-
-## 🤝 Contributing
-Feel free to submit issues and enhancement requests!
