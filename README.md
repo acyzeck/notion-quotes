@@ -2,7 +2,7 @@
 
 A minimalist, elegant quote generator featuring Japanese photography and creativity-related expressions. Built specifically for embedding in Notion pages.
 
-![Demo](assets/demo.png)
+![Demo](assets/demo.gif)
 
 ## 🔗 Live Demo
 https://danhilse.github.io/notion-quotes/
@@ -10,8 +10,8 @@ https://danhilse.github.io/notion-quotes/
 ## 🎯 Features
 - Clean, modern design with proper Japanese typography
 - Smooth animations and transitions
+- Randomized quote on page load
 - Click-to-shuffle functionality
-- 15 curated Japanese expressions related to photography and creativity
 - Fully responsive and embedded-friendly
 
 ## 📝 Usage in Notion
