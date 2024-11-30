@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notion Quote Generator</title>
+    <title>Japanese Photography Quotes</title>
     <style>
         body {
             margin: 0;
@@ -11,7 +11,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
         }
         .quote-container {
-            padding: 1rem;
+            padding: 1.5rem;
             background-color: rgb(247, 247, 247);
             border-radius: 0.5rem;
             border: 1px solid rgba(0, 0, 0, 0.1);
@@ -31,50 +31,66 @@
             color: rgb(55, 53, 47);
             line-height: 1.5;
         }
-        .quote-author {
-            margin: 0;
-            color: rgb(120, 119, 116);
-            font-size: 0.875rem;
+        .japanese {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        .phonetic {
+            color: rgb(100, 100, 100);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+        .translation {
+            color: rgb(55, 53, 47);
         }
     </style>
 </head>
 <body>
     <div class="quote-container">
-        <div class="emoji">💭</div>
+        <div class="emoji">🎌</div>
         <div class="quote-content">
-            <p class="quote-text" id="quote-text"></p>
-            <p class="quote-author" id="quote-author"></p>
+            <p class="quote-text japanese" id="quote-japanese"></p>
+            <p class="quote-text phonetic" id="quote-phonetic"></p>
+            <p class="quote-text translation" id="quote-translation"></p>
         </div>
     </div>
 
     <script>
         const quotes = [
             {
-                text: "First, solve the problem. Then, write the code.",
-                author: "John Johnson"
+                japanese: "改善",
+                phonetic: "Kaizen",
+                translation: "Change for the better - continuous improvement in small steps"
             },
             {
-                text: "Make it work, make it right, make it fast.",
-                author: "Kent Beck"
+                japanese: "好きこそ物の上手なれ",
+                phonetic: "Suki koso mono no jouzu nare",
+                translation: "If you like it, you will become good at it"
             },
             {
-                text: "Simplicity is prerequisite for reliability.",
-                author: "Edsger W. Dijkstra"
+                japanese: "七転び八起き",
+                phonetic: "Nana korobi ya oki",
+                translation: "Fall down seven times, stand up eight - never give up"
             },
             {
-                text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
-                author: "Martin Fowler"
+                japanese: "一期一会",
+                phonetic: "Ichigo ichie",
+                translation: "One time, one meeting - every moment is a once-in-a-lifetime opportunity"
             },
             {
-                text: "The best way to predict the future is to invent it.",
-                author: "Alan Kay"
+                japanese: "十人十色",
+                phonetic: "Juunin toiro",
+                translation: "Ten people, ten colors - everyone has their own unique style and way"
             }
         ];
 
         function setRandomQuote() {
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            document.getElementById('quote-text').textContent = randomQuote.text;
-            document.getElementById('quote-author').textContent = `— ${randomQuote.author}`;
+            document.getElementById('quote-japanese').textContent = randomQuote.japanese;
+            document.getElementById('quote-phonetic').textContent = randomQuote.phonetic;
+            document.getElementById('quote-translation').textContent = randomQuote.translation;
         }
 
         // Set initial quote
