@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Habits Wisdom</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background: #fafafa;
+        }
+        .card-container {
+            padding: 2rem;
+            height: 180px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .card-container::after {
+            content: "↻";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: #888;
+        }
+        .card-container:hover::after {
+            opacity: 0.5;
+        }
+        .card-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+            position: relative;
+        }
+        .main-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin: 0 0 0.8rem 0;
+            color: #2c2c2c;
+            letter-spacing: 0.01em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease forwards;
+            line-height: 1.4;
+        }
+        .implementation {
+            font-family: 'Inter', sans-serif;
+            color: #555;
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin: 0;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.1s forwards;
+            line-height: 1.4;
+        }
+        .source {
+            font-family: 'Inter', sans-serif;
+            color: #888;
+            font-size: 0.8rem;
+            font-weight: 400;
+            margin: 0.8rem 0 0 0;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.2s forwards;
+        }
+        .quote {
+            font-style: italic;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .card-container:active {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container" onclick="setRandomCard()" title="Click for another insight">
+        <div class="card-content">
+            <p class="main-text" id="card-main"></p>
+            <p class="implementation" id="card-implementation"></p>
+            <p class="source" id="card-source"></p>
+        </div>
+    </div>
+
+    <script>
+        const cards = [
+            {
+                main: "Use habit stacking to build new habits",
+                implementation: "After [CURRENT HABIT], I will [NEW HABIT]. For example: 'After I pour my morning coffee, I will meditate for one minute.'",
+                source: "Implementation Strategy - Atomic Habits"
+            },
+            {
+                main: "\"You do not rise to the level of your goals. You fall to the level of your systems.\"",
+                implementation: "Focus on building systems rather than setting goals. Create a schedule for your habits that you can stick to regardless of motivation.",
+                source: "James Clear - Atomic Habits, p. 27"
+            },
+            {
+                main: "Make the cues of good habits obvious",
+                implementation: "Want to exercise? Put your workout clothes next to your bed. Want to eat better? Put healthy snacks at eye level in your kitchen.",
+                source: "The 1st Law - Atomic Habits"
+            },
+            {
+                main: "\"One of the best ways to build a new habit is to identify a current habit you already do each day and then stack your new behavior on top.\"",
+                implementation: "Current habits like brewing coffee, brushing teeth, or leaving work can become triggers for new behaviors.",
+                source: "James Clear - Atomic Habits, p. 74"
+            },
+            {
+                main: "Use the Two-Minute Rule to start new habits",
+                implementation: "Scale down your habits until they can be done in two minutes or less. Read one page, do one push-up, write one sentence.",
+                source: "The 3rd Law - Atomic Habits"
+            },
+            {
+                main: "\"The more immediate the reward, the more likely the action will be repeated.\"",
+                implementation: "Add an immediate reward to any habit you want to build. Example: After exercising, take a refreshing shower you enjoy.",
+                source: "James Clear - Atomic Habits, p. 189"
+            },
+            {
+                main: "Make good habits obvious, attractive, easy, and satisfying",
+                implementation: "Place visual cues in your environment, bundle with activities you enjoy, reduce friction, and track your progress.",
+                source: "The Four Laws - Atomic Habits"
+            },
+            {
+                main: "\"Changes that seem small and unimportant at first will compound into remarkable results if you're willing to stick with them for years.\"",
+                implementation: "Focus on 1% improvements. Small changes in daily routines add up to significant changes over time.",
+                source: "James Clear - Atomic Habits, p. 7"
+            },
+            {
+                main: "Environment design beats willpower",
+                implementation: "Make good habits easy by designing your environment: Lay out clothes the night before, prep healthy meals in advance, charge your phone outside the bedroom.",
+                source: "Design Strategy - Atomic Habits"
+            },
+            {
+                main: "\"Never miss twice. If you miss one day, try to get back on track as quickly as possible.\"",
+                implementation: "Missing once is an accident. Missing twice is the start of a new habit. Recovery is critical - get back on track immediately.",
+                source: "James Clear - Atomic Habits, p. 201"
+            },
+            {
+                main: "Use temptation bundling to make habits attractive",
+                implementation: "Only listen to your favorite podcast while exercising. Only get your favorite coffee while doing important work.",
+                source: "The 2nd Law - Atomic Habits"
+            },
+            {
+                main: "\"Success is the product of daily habits—not once-in-a-lifetime transformations.\"",
+                implementation: "Focus on taking small actions consistently rather than trying to make massive changes all at once.",
+                source: "James Clear - Atomic Habits, p. 18"
+            },
+            {
+                main: "Track your habits visually",
+                implementation: "Use a habit tracker, calendar, or journal to record your habits. Don't break the chain of X's on your calendar.",
+                source: "Measurement Strategy - Atomic Habits"
+            },
+            {
+                main: "\"Every action you take is a vote for the type of person you wish to become.\"",
+                implementation: "Consider the identity you want to build. Make choices that reinforce being that type of person.",
+                source: "James Clear - Atomic Habits, p. 38"
+            },
+            {
+                main: "Reduce friction for good habits, increase it for bad ones",
+                implementation: "Set out your gym clothes the night before. Unplug the TV and put it in a closet. Make good habits the path of least resistance.",
+                source: "Friction Strategy - Atomic Habits"
+            }
+        ];
+
+        let currentCardIndex = -1;
+
+        function setRandomCard() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * cards.length);
+            } while (newIndex === currentCardIndex && cards.length > 1);
+            
+            currentCardIndex = newIndex;
+            const card = cards[currentCardIndex];
+            
+            // Remove existing elements
+            const container = document.querySelector('.card-content');
+            container.innerHTML = '';
+            
+            // Create and append new elements
+            const main = document.createElement('p');
+            main.className = 'main-text';
+            if (card.main.startsWith('"')) {
+                main.classList.add('quote');
+            }
+            main.textContent = card.main;
+            
+            const implementation = document.createElement('p');
+            implementation.className = 'implementation';
+            implementation.textContent = card.implementation;
+            
+            const source = document.createElement('p');
+            source.className = 'source';
+            source.textContent = card.source;
+            
+            container.appendChild(main);
+            container.appendChild(implementation);
+            container.appendChild(source);
+        }
+
+        // Set initial quote
+        setRandomCard();
+    </script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Photography Quotes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500&family=Noto+Serif+JP:wght@200;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background: #fafafa;
+        }
+        .quote-container {
+            padding: 2rem;
+            height: 140px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .quote-container::after {
+            content: "↻";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: #888;
+        }
+        .quote-container:hover::after {
+            opacity: 0.5;
+        }
+        .quote-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .japanese {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 0 0 0.5rem 0;
+            color: #2c2c2c;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+        .phonetic {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin: 0 0 0.75rem 0;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.1s forwards;
+        }
+        .translation {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #444;
+            font-size: 1rem;
+            font-weight: 300;
+            margin: 0;
+            letter-spacing: 0.02em;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.2s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .quote-container:active {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container" onclick="setRandomQuote()" title="Click for another quote">
+        <div class="quote-content">
+            <p class="japanese" id="quote-japanese"></p>
+            <p class="phonetic" id="quote-phonetic"></p>
+            <p class="translation" id="quote-translation"></p>
+        </div>
+    </div>
+
+    <script>
+        const quotes = [
+            {
+                japanese: "改善",
+                phonetic: "Kaizen",
+                translation: "Change for the better - continuous improvement in small steps"
+            },
+            {
+                japanese: "好きこそ物の上手なれ",
+                phonetic: "Suki koso mono no jouzu nare",
+                translation: "If you like it, you will become good at it"
+            },
+            {
+                japanese: "七転び八起き",
+                phonetic: "Nana korobi ya oki",
+                translation: "Fall down seven times, stand up eight - never give up"
+            },
+            {
+                japanese: "一期一会",
+                phonetic: "Ichigo ichie",
+                translation: "One time, one meeting - every moment is a once-in-a-lifetime opportunity"
+            },
+            {
+                japanese: "十人十色",
+                phonetic: "Juunin toiro",
+                translation: "Ten people, ten colors - everyone has their own unique style and way"
+            },
+            {
+                japanese: "初心忘るべからず",
+                phonetic: "Shoshin wasuru bekarazu",
+                translation: "Never forget your beginner's mind - maintain your sense of wonder"
+            },
+            {
+                japanese: "千里の道も一歩から",
+                phonetic: "Senri no michi mo ippo kara",
+                translation: "A journey of a thousand miles begins with a single step"
+            },
+            {
+                japanese: "温故知新",
+                phonetic: "Onko chishin",
+                translation: "Learn from the past to create new things"
+            },
+            {
+                japanese: "見る目が変われば世界が変わる",
+                phonetic: "Miru me ga kawareba sekai ga kawaru",
+                translation: "When your perspective changes, the world changes"
+            },
+            {
+                japanese: "継続は力なり",
+                phonetic: "Keizoku wa chikara nari",
+                translation: "Consistency is power - persistence leads to strength"
+            },
+            {
+                japanese: "石の上にも三年",
+                phonetic: "Ishi no ue nimo san-nen",
+                translation: "Sit on a stone for three years - patience leads to success"
+            },
+            {
+                japanese: "わび・さび",
+                phonetic: "Wabi-sabi",
+                translation: "Finding beauty in simplicity and imperfection"
+            },
+            {
+                japanese: "独創性",
+                phonetic: "Dokusosei",
+                translation: "Originality - the essence of unique creative expression"
+            },
+            {
+                japanese: "物は考えよう",
+                phonetic: "Mono wa kangaeyo",
+                translation: "It's all in how you look at it - perspective matters"
+            },
+            {
+                japanese: "臨機応変",
+                phonetic: "Rinkiohen",
+                translation: "Adaptability to the moment - flexibility in approach"
+            }
+        ];
+
+        let currentQuoteIndex = -1;
+
+        function setRandomQuote() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * quotes.length);
+            } while (newIndex === currentQuoteIndex && quotes.length > 1);
+            
+            currentQuoteIndex = newIndex;
+            const quote = quotes[currentQuoteIndex];
+            
+            // Remove existing elements
+            const container = document.querySelector('.quote-content');
+            container.innerHTML = '';
+            
+            // Create and append new elements to trigger animation
+            const japanese = document.createElement('p');
+            japanese.className = 'japanese';
+            japanese.textContent = quote.japanese;
+            
+            const phonetic = document.createElement('p');
+            phonetic.className = 'phonetic';
+            phonetic.textContent = quote.phonetic;
+            
+            const translation = document.createElement('p');
+            translation.className = 'translation';
+            translation.textContent = quote.translation;
+            
+            container.appendChild(japanese);
+            container.appendChild(phonetic);
+            container.appendChild(translation);
+        }
+
+        // Set initial quote
+        setRandomQuote();
+    </script>
+</body>
+</html>
