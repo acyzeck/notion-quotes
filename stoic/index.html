@@ -1,76 +1,237 @@
-import React, { useState, useEffect } from 'react';
-import { BookOpen } from 'lucide-react';
-
-const quotes = [
-  {
-    quote: "Accept the things to which fate binds you, and love the people with whom fate brings you together, but do so with all your heart.",
-    book: "Book VI",
-    theme: "Acceptance & Love",
-    contemplation: "Consider how you might better embrace your current circumstances and relationships."
-  },
-  {
-    quote: "When you arise in the morning, think of what a precious privilege it is to be alive - to breathe, to think, to enjoy, to love.",
-    book: "Book II",
-    theme: "Gratitude",
-    contemplation: "What aspects of your life have you taken for granted today?"
-  },
-  {
-    quote: "The best revenge is not to be like your enemy.",
-    book: "Book VI",
-    theme: "Virtue",
-    contemplation: "How might you respond to negativity with understanding rather than retaliation?"
-  },
-  {
-    quote: "Waste no more time arguing what a good man should be. Be one.",
-    book: "Book X",
-    theme: "Action",
-    contemplation: "What single action could you take right now to embody your principles?"
-  }
-];
-
-export default function StoicQuote() {
-  const [currentQuote, setCurrentQuote] = useState(0);
-  const [isRotating, setIsRotating] = useState(false);
-
-  const nextQuote = () => {
-    setIsRotating(true);
-    setTimeout(() => {
-      setCurrentQuote((prev) => (prev + 1) % quotes.length);
-      setIsRotating(false);
-    }, 300);
-  };
-
-  useEffect(() => {
-    setCurrentQuote(Math.floor(Math.random() * quotes.length));
-  }, []);
-
-  return (
-    <div className="min-h-screen bg-stone-50 flex items-center justify-center p-4">
-      <div 
-        onClick={nextQuote}
-        className="max-w-2xl w-full bg-white rounded-lg shadow-lg p-8 cursor-pointer hover:shadow-xl transition-shadow duration-300"
-      >
-        <div className={`transition-opacity duration-300 ${isRotating ? 'opacity-0' : 'opacity-100'}`}>
-          {/* Book indicator */}
-          <div className="flex items-center space-x-2 text-stone-600 mb-6">
-            <BookOpen size={20} />
-            <span className="text-sm font-medium">{quotes[currentQuote].book}</span>
-          </div>
-          
-          {/* Main quote */}
-          <p className="text-2xl text-stone-800 font-serif mb-6 leading-relaxed">
-            "{quotes[currentQuote].quote}"
-          </p>
-          
-          {/* Contemplation */}
-          <div className="border-t border-stone-200 pt-4 mt-4">
-            <p className="text-stone-600 text-sm italic">
-              For contemplation: {quotes[currentQuote].contemplation}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoic Quotes</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Adjusted fonts for English content -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;500&family=Noto+Serif:wght@200;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons (SVG Sprite) -->
+    <script src="https://unpkg.com/lucide@0.244.0/dist/lucide.js"></script>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 100vh;
+            width: 100vw;
+            background: #fafafa;
+            font-family: 'Noto Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        /* Quote Container */
+        .quote-container {
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .quote-container:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        .quote-container:active {
+            background: #f5f5f5;
+        }
+        /* Refresh Icon */
+        .quote-container::after {
+            content: "";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 24px;
+            height: 24px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .quote-container:hover::after {
+            opacity: 0.5;
+            /* Injecting the BookOpen icon using Lucide */
+            content: "";
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="%23888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h20M2 17h20M7 7v10M17 7v10"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        /* Quote Content */
+        .quote-content {
+            text-align: center;
+        }
+        .quote-text {
+            font-family: 'Noto Serif', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #2c2c2c;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+        .quote-book {
+            font-family: 'Noto Sans', sans-serif;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.1s forwards;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .quote-book svg {
+            margin-right: 0.5rem;
+        }
+        .quote-contemplation {
+            font-family: 'Noto Sans', sans-serif;
+            color: #444;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.2s forwards;
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+        /* Fade Classes */
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        .fade-out {
+            animation: fadeOut 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container" onclick="nextQuote()" title="Click for another quote">
+        <div class="quote-content">
+            <p class="quote-text" id="quote-text">"Accept the things to which fate binds you, and love the people with whom fate brings you together, but do so with all your heart."</p>
+            <p class="quote-book" id="quote-book">
+                <!-- BookOpen Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 7h20M2 17h20M7 7v10M17 7v10"/>
+                </svg>
+                Book VI
             </p>
-          </div>
-          
+            <p class="quote-contemplation" id="quote-contemplation">For contemplation: Consider how you might better embrace your current circumstances and relationships.</p>
         </div>
-      </div>
     </div>
-  );
-}
+
+    <script>
+        // Quotes Data
+        const quotes = [
+        {
+            quote: "Accept the things to which fate binds you, and love the people with whom fate brings you together, but do so with all your heart.",
+            book: "Book VI",
+            theme: "Acceptance & Love",
+            contemplation: "Consider how you might better embrace your current circumstances and relationships."
+        },
+        {
+            quote: "When you arise in the morning, think of what a precious privilege it is to be alive - to breathe, to think, to enjoy, to love.",
+            book: "Book II",
+            theme: "Gratitude",
+            contemplation: "What aspects of your life have you taken for granted today?"
+        },
+        {
+            quote: "The best revenge is not to be like your enemy.",
+            book: "Book VI",
+            theme: "Virtue",
+            contemplation: "How might you respond to negativity with understanding rather than retaliation?"
+        },
+        {
+            quote: "Waste no more time arguing what a good man should be. Be one.",
+            book: "Book X",
+            theme: "Action",
+            contemplation: "What single action could you take right now to embody your principles?"
+        }
+    ];
+
+        let currentQuoteIndex = -1;
+
+        // DOM Elements
+        const quoteText = document.getElementById('quote-text');
+        const quoteBook = document.getElementById('quote-book');
+        const quoteContemplation = document.getElementById('quote-contemplation');
+        const quoteContainer = document.querySelector('.quote-container');
+
+        // Initialize with a random quote
+        window.onload = function() {
+            setRandomQuote();
+        };
+
+        function setRandomQuote() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * quotes.length);
+            } while (newIndex === currentQuoteIndex && quotes.length > 1);
+            currentQuoteIndex = newIndex;
+            displayQuote(quotes[currentQuoteIndex]);
+        }
+
+        function displayQuote(quoteObj) {
+            // Add fade-out classes
+            quoteText.classList.remove('fade-in');
+            quoteBook.classList.remove('fade-in');
+            quoteContemplation.classList.remove('fade-in');
+
+            quoteText.classList.add('fade-out');
+            quoteBook.classList.add('fade-out');
+            quoteContemplation.classList.add('fade-out');
+
+            // After fade-out, change the content and fade-in
+            setTimeout(() => {
+                quoteText.textContent = `"${quoteObj.quote}"`;
+                quoteBook.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 7h20M2 17h20M7 7v10M17 7v10"/>
+                    </svg>
+                    ${quoteObj.book}
+                `;
+                quoteContemplation.textContent = `For contemplation: ${quoteObj.contemplation}`;
+
+                // Remove fade-out and add fade-in
+                quoteText.classList.remove('fade-out');
+                quoteBook.classList.remove('fade-out');
+                quoteContemplation.classList.remove('fade-out');
+
+                quoteText.classList.add('fade-in');
+                quoteBook.classList.add('fade-in');
+                quoteContemplation.classList.add('fade-in');
+            }, 300); // Match the timeout with the fade-out duration
+        }
+
+        function nextQuote() {
+            setRandomQuote();
+        }
+    </script>
+</body>
+</html>
