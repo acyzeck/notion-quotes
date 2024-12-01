@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Biases</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background: #151515;
+            font-family: 'Manrope', sans-serif;
+            color: #fff;
+        }
+        .bias-container {
+            padding: 2rem;
+            height: 400px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .bias-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+        .brain-icon {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.2rem;
+            opacity: 0.2;
+            transform: rotate(-15deg);
+        }
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 0.5rem 0;
+            background: linear-gradient(120deg, #7b61ff, #61ddff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+        .subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 0 2rem 0;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.1s forwards;
+        }
+        .sections-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .section {
+            position: relative;
+            padding: 1.25rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        .section:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+        .recognition { animation: fadeIn 0.6s ease 0.2s forwards; }
+        .strategy { animation: fadeIn 0.6s ease 0.3s forwards; }
+        
+        .section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0 0 0.75rem 0;
+            font-weight: 600;
+        }
+        .section-content {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            line-height: 1.6;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 640px) {
+            .bias-container {
+                padding: 1rem;
+                height: 520px;
+            }
+            .bias-content {
+                padding: 1.5rem;
+            }
+            .title {
+                font-size: 1.6rem;
+            }
+            .sections-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bias-container" onclick="setRandomBias()" title="Click for another bias">
+        <div class="bias-content">
+            <span class="brain-icon">🧠</span>
+            <h2 class="title" id="title"></h2>
+            <p class="subtitle" id="subtitle"></p>
+            <div class="sections-container">
+                <div class="section recognition">
+                    <p class="section-title">How to Recognize It</p>
+                    <p class="section-content" id="recognition"></p>
+                </div>
+                <div class="section strategy">
+                    <p class="section-title">Strategy to Overcome</p>
+                    <p class="section-content" id="strategy"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const biases = [
+            {
+                title: "Confirmation Bias",
+                subtitle: "The tendency to search for and favor information that confirms our pre-existing beliefs",
+                recognition: "Notice when you're quickly accepting information that supports your views while scrutinizing or dismissing contradictory evidence.",
+                strategy: "Actively seek out contradictory evidence and different perspectives. Ask yourself: 'What would convince me I'm wrong?'"
+            },
+            {
+                title: "Anchoring Bias",
+                subtitle: "Over-relying on the first piece of information encountered when making decisions",
+                recognition: "Be aware when a number or reference point is strongly influencing subsequent judgments, especially in negotiations or estimates.",
+                strategy: "Consider multiple reference points and gather information from different sources before making a decision."
+            },
+            {
+                title: "Availability Bias",
+                subtitle: "Overestimating the probability of events based on how easily examples come to mind",
+                recognition: "Check if recent or memorable events are disproportionately influencing your risk assessment or decision-making.",
+                strategy: "Look up actual statistics and base rates. Consider less memorable but equally important factors."
+            },
+            {
+                title: "Sunk Cost Fallacy",
+                subtitle: "Continuing an endeavor due to past investment, despite new evidence suggesting you should stop",
+                recognition: "Watch for situations where you're reluctant to change course primarily because of previous investments of time, money, or effort.",
+                strategy: "Focus on future costs and benefits, ignoring past investments that cannot be recovered."
+            },
+            {
+                title: "Dunning-Kruger Effect",
+                subtitle: "Overestimating our abilities in areas where we have limited knowledge",
+                recognition: "Notice when you feel very confident about a topic despite having limited experience or formal training in it.",
+                strategy: "Embrace uncertainty and seek expert feedback. Remember that expertise usually reveals how much more there is to learn."
+            }
+        ];
+
+        let currentBiasIndex = -1;
+
+        function setRandomBias() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * biases.length);
+            } while (newIndex === currentBiasIndex && biases.length > 1);
+            
+            currentBiasIndex = newIndex;
+            const bias = biases[currentBiasIndex];
+            
+            const elements = ['title', 'subtitle', 'recognition', 'strategy'].map(id => 
+                document.getElementById(id)
+            );
+            
+            elements.forEach(el => {
+                el.style.animation = 'none';
+                el.offsetHeight;
+                el.style.animation = null;
+            });
+            
+            elements[0].textContent = bias.title;
+            elements[1].textContent = bias.subtitle;
+            elements[2].textContent = bias.recognition;
+            elements[3].textContent = bias.strategy;
+        }
+
+        // Set initial bias
+        setRandomBias();
+    </script>
+</body>
+</html>

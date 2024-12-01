@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Principles Thinking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(145deg, #fafbff 0%, #f5f7ff 100%);
+            font-family: 'Inter', sans-serif;
+        }
+        .card-container {
+            padding: 2rem;
+            height: 340px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .card-content {
+            max-width: 640px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            position: relative;
+            border: 1px solid rgba(240, 242, 250, 0.8);
+        }
+        .card-content::after {
+            content: "↻";
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1rem;
+            color: #a0aec0;
+            opacity: 0.5;
+        }
+        .category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #6b7280;
+            margin: 0 0 0.5rem 0;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+        .principle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            color: #1a1a1a;
+            line-height: 1.3;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.1s forwards;
+        }
+        .definition {
+            font-size: 1rem;
+            color: #4a5568;
+            margin: 0 0 1.25rem 0;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.2s forwards;
+        }
+        .example-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #f0f2f6;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.3s forwards;
+        }
+        .example-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748b;
+            margin: 0 0 0.5rem 0;
+            font-weight: 500;
+        }
+        .example-text {
+            font-size: 0.925rem;
+            color: #475569;
+            margin: 0;
+            line-height: 1.5;
+        }
+        .exercise {
+            font-size: 0.925rem;
+            color: #3b82f6;
+            margin: 0;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.4s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .card-container:hover .card-content {
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.08),
+                0 10px 15px -3px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+        }
+        .card-container:active .card-content {
+            transform: translateY(0px);
+        }
+        @media (max-width: 640px) {
+            .card-container {
+                padding: 1rem;
+                height: 400px;
+            }
+            .card-content {
+                padding: 1.5rem;
+            }
+            .principle {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container" onclick="setRandomCard()" title="Click for another principle">
+        <div class="card-content">
+            <p class="category">First Principles</p>
+            <p class="principle" id="principle"></p>
+            <p class="definition" id="definition"></p>
+            <div class="example-box">
+                <p class="example-title">Example</p>
+                <p class="example-text" id="example"></p>
+            </div>
+            <p class="exercise" id="exercise"></p>
+        </div>
+    </div>
+
+    <script>
+        const cards = [
+            {
+                principle: "Question Everything",
+                definition: "Challenge every assumption and conventional wisdom until you reach foundational truths that cannot be broken down further.",
+                example: "When Elon Musk started SpaceX, instead of accepting standard rocket prices, he broke down the cost of raw materials. This revealed that rockets could be built for about 2% of the traditional cost.",
+                exercise: "Choose a common practice in your field. Ask 'why' five times about it. What fundamental assumptions emerge?"
+            },
+            {
+                principle: "Atomic Deconstruction",
+                definition: "Break complex systems into their smallest, most fundamental parts before rebuilding them.",
+                example: "Amazon revolutionized computing by breaking down enterprise IT into its most basic components, creating AWS as simple, atomic building blocks that could be reassembled as needed.",
+                exercise: "Take a complex process you deal with daily. List every basic component. Could any be eliminated or simplified?"
+            },
+            {
+                principle: "Zero-Based Thinking",
+                definition: "Approach problems as if starting from scratch, ignoring existing solutions and historical precedent.",
+                example: "Netflix didn't try to improve video rental stores - they questioned why physical locations were needed at all, leading to the streaming revolution.",
+                exercise: "Imagine you're solving your current challenge with no knowledge of existing solutions. What approach would you take?"
+            },
+            {
+                principle: "Find the Bottleneck",
+                definition: "Identify the fundamental constraint that's truly limiting progress in a system.",
+                example: "Toyota revolutionized manufacturing by identifying time, not labor or materials, as the key constraint, leading to the just-in-time production system.",
+                exercise: "In your current project, what's the deepest underlying factor limiting progress? What if it didn't exist?"
+            }
+        ];
+
+        let currentCardIndex = -1;
+
+        function setRandomCard() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * cards.length);
+            } while (newIndex === currentCardIndex && cards.length > 1);
+            
+            currentCardIndex = newIndex;
+            const card = cards[currentCardIndex];
+            
+            const principle = document.querySelector('.principle');
+            const definition = document.querySelector('.definition');
+            const example = document.querySelector('.example-text');
+            const exercise = document.querySelector('.exercise');
+            
+            // Remove elements
+            principle.textContent = '';
+            definition.textContent = '';
+            example.textContent = '';
+            exercise.textContent = '';
+            
+            // Reset animations
+            [principle, definition, example, exercise].forEach(el => {
+                el.style.animation = 'none';
+                el.offsetHeight; // Trigger reflow
+                el.style.animation = null;
+            });
+            
+            // Set new content
+            principle.textContent = card.principle;
+            definition.textContent = card.definition;
+            example.textContent = card.example;
+            exercise.textContent = card.exercise;
+        }
+
+        // Set initial card
+        setRandomCard();
+    </script>
+</body>
+</html>

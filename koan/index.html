@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zen Koans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background: #f8f6f3;
+        }
+        .koan-container {
+            padding: 2rem;
+            height: 320px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+        .koan-content {
+            max-width: 580px;
+            margin: 0 auto;
+            background: #fcfbf9;
+            padding: 3rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+        .koan-content::before {
+            content: "⬤";
+            position: absolute;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.4rem;
+            color: #999;
+            opacity: 0.3;
+        }
+        .title {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin: 0 0 1.8rem 0;
+            color: #2c2c2c;
+            text-align: center;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 1s ease forwards;
+        }
+        .story {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.25rem;
+            line-height: 1.3;
+            color: #3a3a3a;
+            margin: 0;
+            text-align: center;
+            letter-spacing: 0.01em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 1s ease 0.3s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .koan-container:hover .koan-content {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+        }
+        @media (max-width: 640px) {
+            .koan-container {
+                padding: 1rem;
+                height: 360px;
+            }
+            .koan-content {
+                padding: 2rem;
+            }
+            .title {
+                font-size: 1.3rem;
+            }
+            .story {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="koan-container" onclick="setRandomKoan()" title="Click for another koan">
+        <div class="koan-content">
+            <p class="title" id="title"></p>
+            <p class="story" id="story"></p>
+        </div>
+    </div>
+
+    <script>
+        const koans = [
+            {
+                title: "Not the Wind, Not the Flag",
+                story: "Two monks were watching a flag flapping in the wind. One said, 'The flag is moving.' The other said, 'The wind is moving.' The Sixth Patriarch happened to be passing by. He told them, 'Not the wind, not the flag; mind is moving.'"
+            },
+            {
+                title: "Empty Your Cup",
+                story: "A university professor visited a Zen master to inquire about Zen. As the master served tea, he poured his visitor's cup full, and then kept on pouring. The professor watched the overflow until he could no longer restrain himself: 'It is overfull. No more will go in!' 'Like this cup,' the master said, 'you are full of your own opinions and speculations. How can I show you Zen unless you first empty your cup?'"
+            },
+            {
+                title: "The Gateway",
+                story: "A monk asked the master, 'What is the gate of liberation?' The master replied, 'The sound of the stream by night.'"
+            },
+            {
+                title: "The Sound of One Hand",
+                story: "A student asked the master, 'What is the sound of one hand clapping?' For three years the student meditated on this, presenting various answers. Finally, the student reached true silence. There was no more need for answers."
+            },
+            {
+                title: "Original Face",
+                story: "The master asked the monk, 'Show me your original face, the one you had before your parents were born.' The monk remained silent."
+            },
+            {
+                title: "The Moon's Reflection",
+                story: "The master pointed at the moon's reflection in a pool of water and asked, 'The moon is there, but where is it really?' The student reached down to touch the reflection, rippling the water."
+            },
+            {
+                title: "The Present Moment",
+                story: "A monk asked, 'What is the most important moment?' The master replied, 'The one you are in.' The monk said, 'How should I stay in it?' The master replied, 'Get out of it.'"
+            }
+        ];
+
+        let currentKoanIndex = -1;
+
+        function setRandomKoan() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * koans.length);
+            } while (newIndex === currentKoanIndex && koans.length > 1);
+            
+            currentKoanIndex = newIndex;
+            const koan = koans[currentKoanIndex];
+            
+            const title = document.querySelector('.title');
+            const story = document.querySelector('.story');
+            
+            title.style.animation = 'none';
+            story.style.animation = 'none';
+            
+            void title.offsetHeight;
+            void story.offsetHeight;
+            
+            title.style.animation = null;
+            story.style.animation = null;
+            
+            title.textContent = koan.title;
+            story.textContent = koan.story;
+        }
+
+        // Set initial koan
+        setRandomKoan();
+    </script>
+</body>
+</html>

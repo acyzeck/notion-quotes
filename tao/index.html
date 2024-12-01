@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tao Te Ching Quotes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Source+Sans+Pro:wght@300;400&family=Crimson+Pro:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background: #fcfcfc;
+        }
+        .quote-container {
+            padding: 2.5rem;
+            height: 240px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        .quote-container::before {
+            content: "☯";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            color: #666;
+        }
+        .quote-container:hover::before {
+            opacity: 0.3;
+            transform: rotate(180deg);
+        }
+        .quote-content {
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .chinese {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin: 0 0 0.5rem 0;
+            color: #2c2c2c;
+            line-height: 1.4;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+        .pinyin {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin: 0 0 1rem 0;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.8s ease 0.2s forwards;
+        }
+        .translation {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin: 0 0 0.8rem 0;
+            color: #333;
+            line-height: 1.4;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.8s ease 0.4s forwards;
+        }
+        .chapter {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #888;
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin: 0;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.8s ease 0.6s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .quote-container:active {
+            background: #f7f7f7;
+        }
+        @media (max-width: 640px) {
+            .chinese {
+                font-size: 1.6rem;
+            }
+            .translation {
+                font-size: 1.2rem;
+            }
+            .quote-container {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container" onclick="setRandomQuote()" title="Click for another quote">
+        <div class="quote-content">
+            <p class="chinese" id="chinese"></p>
+            <p class="pinyin" id="pinyin"></p>
+            <p class="translation" id="translation"></p>
+            <p class="chapter" id="chapter"></p>
+        </div>
+    </div>
+
+    <script>
+        const quotes = [
+            {
+                chinese: "道可道，非常道。名可名，非常名。",
+                pinyin: "Dào kě dào, fēi cháng dào. Míng kě míng, fēi cháng míng.",
+                translation: "The Tao that can be told is not the eternal Tao. The name that can be named is not the eternal name.",
+                chapter: "Chapter 1"
+            },
+            {
+                chinese: "上善若水",
+                pinyin: "Shàng shàn ruò shuǐ",
+                translation: "The highest good is like water. For water benefits all things and goes against none of them.",
+                chapter: "Chapter 8"
+            },
+            {
+                chinese: "千里之行，始於足下",
+                pinyin: "Qiān lǐ zhī xíng, shǐ yú zú xià",
+                translation: "A journey of a thousand miles begins with a single step.",
+                chapter: "Chapter 64"
+            },
+            {
+                chinese: "知人者智，自知者明",
+                pinyin: "Zhī rén zhě zhì, zì zhī zhě míng",
+                translation: "Knowing others is intelligence; knowing yourself is true wisdom.",
+                chapter: "Chapter 33"
+            },
+            {
+                chinese: "天下柔弱莫过于水，而攻坚强者莫之能胜",
+                pinyin: "Tiān xià róu ruò mò guò yú shuǐ, ér gōng jiān qiáng zhě mò zhī néng shèng",
+                translation: "The softest things in the universe overcome the hardest things in the universe.",
+                chapter: "Chapter 43"
+            },
+            {
+                chinese: "知者不言，言者不知",
+                pinyin: "Zhī zhě bù yán, yán zhě bù zhī",
+                translation: "He who knows does not speak. He who speaks does not know.",
+                chapter: "Chapter 56"
+            },
+            {
+                chinese: "知足者富",
+                pinyin: "Zhī zú zhě fù",
+                translation: "He who knows that enough is enough will always have enough.",
+                chapter: "Chapter 46"
+            },
+            {
+                chinese: "善行无辙迹",
+                pinyin: "Shàn xíng wú zhé jì",
+                translation: "A good traveler has no fixed plans and is not intent upon arriving.",
+                chapter: "Chapter 27"
+            },
+            {
+                chinese: "大道至简",
+                pinyin: "Dà dào zhì jiǎn",
+                translation: "The great Tao flows everywhere. It fills everything to the left and to the right.",
+                chapter: "Chapter 34"
+            },
+            {
+                chinese: "无为而无不为",
+                pinyin: "Wú wéi ér wú bù wéi",
+                translation: "Do nothing and yet leave nothing undone.",
+                chapter: "Chapter 48"
+            }
+        ];
+
+        let currentQuoteIndex = -1;
+
+        function setRandomQuote() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * quotes.length);
+            } while (newIndex === currentQuoteIndex && quotes.length > 1);
+            
+            currentQuoteIndex = newIndex;
+            const quote = quotes[currentQuoteIndex];
+            
+            const container = document.querySelector('.quote-content');
+            container.innerHTML = '';
+            
+            const chinese = document.createElement('p');
+            chinese.className = 'chinese';
+            chinese.textContent = quote.chinese;
+            
+            const pinyin = document.createElement('p');
+            pinyin.className = 'pinyin';
+            pinyin.textContent = quote.pinyin;
+            
+            const translation = document.createElement('p');
+            translation.className = 'translation';
+            translation.textContent = quote.translation;
+            
+            const chapter = document.createElement('p');
+            chapter.className = 'chapter';
+            chapter.textContent = quote.chapter;
+            
+            container.appendChild(chinese);
+            container.appendChild(pinyin);
+            container.appendChild(translation);
+            container.appendChild(chapter);
+        }
+
+        // Set initial quote
+        setRandomQuote();
+    </script>
+</body>
+</html>
