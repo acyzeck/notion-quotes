@@ -1,78 +1,66 @@
-# Notion Embedded Quotes
+# Notion Quote Widgets
 
-A collection of minimalist, elegant quote generators built specifically for embedding in Notion pages. Features different collections of wisdom including Japanese concepts, Atomic Habits principles, Marcus Aurelius meditations, and more.
+A collection of minimalist quote widgets for your Notion pages. Each collection features different types of wisdom, from Japanese concepts to Atomic Habits principles.
 
 ![Demo](assets/demo.gif)
 
-## Live Demos
+## Quick Start
 
-- Japanese Wisdom: `https://danhilse.github.io/notion-quotes/kototama/`
-- Atomic Habits: `https://danhilse.github.io/notion-quotes/atomic-habits/`
-- Marcus Aurelius: `https://danhilse.github.io/notion-quotes/stoic/`
-- Tao Te Ching: `https://danhilse.github.io/notion-quotes/tao/`
-- First Principles: `https://danhilse.github.io/notion-quotes/first/`
-- Zen Koans: `https://danhilse.github.io/notion-quotes/koan/`
-- Cognitive Biases: `https://danhilse.github.io/notion-quotes/bias/`
+1. Visit [notion-quotes](https://danhilse.github.io/notion-quotes/) 
+2. Click on any widget to copy its embed link
+3. Paste into Notion and select "Create embed"
+4. Adjust the embed height if needed
+
+## Available Widgets
+
+- Japanese Wisdom ([https://danhilse.github.io/notion-quotes/kototama](https://danhilse.github.io/notion-quotes/kototama))
+- Atomic Habits ([https://danhilse.github.io/notion-quotes/atomic-habits](https://danhilse.github.io/notion-quotes/atomic-habits))
+- Marcus Aurelius ([https://danhilse.github.io/notion-quotes/stoic](https://danhilse.github.io/notion-quotes/stoic))
+- Tao Te Ching ([https://danhilse.github.io/notion-quotes/tao](https://danhilse.github.io/notion-quotes/tao))
+- First Principles ([https://danhilse.github.io/notion-quotes/first](https://danhilse.github.io/notion-quotes/first))
+- Zen Koans ([https://danhilse.github.io/notion-quotes/koan](https://danhilse.github.io/notion-quotes/koan))
+- Cognitive Biases ([https://danhilse.github.io/notion-quotes/bias](https://danhilse.github.io/notion-quotes/bias))
 
 ## Features
 
-- Clean, modern design with proper typography
-- Smooth animations and transitions
-- Randomized quotes on page load
-- Click-to-shuffle functionality
-- Fully responsive and embedded-friendly
-- One-click copy for Notion embedding
-- Different styles for different content types:
-  - Japanese quotes with phonetic readings
-  - Atomic Habits with implementation tips
-  - Meditations with reflections and context
-  - Tao Te Ching with original Chinese and pinyin
-  - First Principles with examples and exercises
-  - Zen Koans with commentaries
-  - Cognitive Biases with recognition patterns
+- Clean, modern design
+- Random quotes on page load
+- Click to shuffle quotes
+- Works perfectly in Notion embeds
+- One-click embedding
+- Different formats per collection:
+  - Japanese quotes (with readings)
+  - Atomic Habits (with tips)
+  - Meditations (with context)
+  - Tao Te Ching (with Chinese text)
+  - First Principles (with examples)
+  - Zen Koans (with commentary)
+  - Cognitive Biases (with patterns)
 
-## Usage in Notion
+## Refreshing Content
 
-1. Visit our [homepage](https://danhilse.github.io/notion-quotes/) and click on any quote collection to copy its embed URL
-2. Create an embed block in your Notion page
-3. Paste the copied URL
+Notion caches embeds. To see new updates:
 
-Or manually choose from these collections:
+1. Add or update the version in the URL:
 ```
-/kototama/      - Japanese wisdom and concepts
-/atomic-habits/  - Atomic Habits principles and tips
-/stoic/         - Marcus Aurelius meditations
-/tao/           - Tao Te Ching wisdom with Chinese text
-/first/         - First Principles thinking methods
-/koan/          - Zen Koans and commentaries
-/bias/          - Common Cognitive Biases
+danhilse.github.io/notion-quotes/kototama/?v=1
+danhilse.github.io/notion-quotes/kototama/?v=2
 ```
 
-### Important: Updating and Cache Busting
+2. Create a new embed with the updated URL
 
-Notion caches embedded content. To see updates after making changes:
-
-1. Increment the version number in your embed URL:
+You can also use a date:
 ```
-https://danhilse.github.io/notion-quotes/kototama/?v=1  // Initial
-https://danhilse.github.io/notion-quotes/kototama/?v=2  // After updates
-```
-
-2. Replace the old embed with a new one using the updated URL
-
-Alternatively, you can use a timestamp:
-```
-https://danhilse.github.io/notion-quotes/kototama/?t=20231130
+danhilse.github.io/notion-quotes/kototama/?t=20231130
 ```
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a pull request
+1. Fork the repo
+2. Create your feature branch
+3. Make your changes
+4. Push and open a PR
 
 ## License
 
-MIT License - see LICENSE file for details
+MIT - see LICENSE file

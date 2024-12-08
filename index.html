@@ -3,56 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Wisdom</title>
+    <title>Notion Quotes Widget</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            padding: 20px;
+            padding: 0;
             min-height: 100vh;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #fafafa;
+            display: flex;
         }
         
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
+        .sidebar {
+            width: 280px;
+            padding: 40px 32px;
+            position: fixed;
+            height: 100vh;
+            box-sizing: border-box;
+            background: #fff;
+            border-right: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
-            color: #2c2c2c;
-            margin-bottom: 1rem;
+        .sidebar-content {
+            flex-grow: 1;
         }
 
-        .header p {
+        .sidebar h1 {
+            font-size: 1.25rem;
+            color: #000;
+            margin: 0 0 8px 0;
+            font-weight: 600;
+        }
+
+        .sidebar p {
             color: #666;
-            max-width: 600px;
-            margin: 0 auto;
+            margin: 0 0 24px 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .instructions {
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .instructions h2 {
+            font-size: 0.9rem;
+            color: #000;
+            margin: 0 0 8px 0;
+            font-weight: 600;
+        }
+
+        .instructions ol {
+            margin: 0;
+            padding-left: 16px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .credits {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: auto;
+        }
+
+        .credits-name {
+            margin-bottom: 8px;
+        }
+
+        .credits-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .credits-links a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .credits-links a:hover {
+            color: #000;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 40px;
+            flex-grow: 1;
+            max-width: 800px;
         }
 
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
         }
         
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
         .embed-container {
             position: relative;
             background: white;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            aspect-ratio: 4/3;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
-        
-        .embed-container:hover .copy-overlay {
-            opacity: 1;
-        }
+
+        /* Individual aspect ratios */
+        .embed-container[data-type="kototama"] { aspect-ratio: 16/9; }
+        .embed-container[data-type="atomic"] { aspect-ratio: 3/2; }
+        .embed-container[data-type="stoic"] { aspect-ratio: 16/10; }
+        .embed-container[data-type="tao"] { aspect-ratio: 3/2; }
+        .embed-container[data-type="principles"] { aspect-ratio: 16/9; }
+        .embed-container[data-type="science"] { aspect-ratio: 3/2; }
+        .embed-container[data-type="biases"] { aspect-ratio: 16/9; }
         
         iframe {
             width: 100%;
@@ -61,34 +137,32 @@
             background: white;
         }
 
-        .copy-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
+        .card-footer {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            cursor: pointer;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            color: #000;
+            font-weight: 500;
+            margin: 0;
         }
 
         .copy-button {
-            background: white;
+            background: none;
             border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
+            padding: 6px 12px;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.8rem;
+            color: #666;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: color 0.2s ease;
         }
 
         .copy-button:hover {
-            transform: scale(1.05);
+            color: #000;
         }
 
         .toast {
@@ -100,6 +174,7 @@
             color: white;
             padding: 12px 24px;
             border-radius: 6px;
+            font-size: 0.9rem;
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -111,62 +186,111 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Daily Wisdom Collections</h1>
-        <p>Click any quote generator to copy its Notion embed URL. Then paste directly into your Notion page.</p>
-    </div>
-
-    <div class="grid">
-        <div class="embed-container">
-            <iframe src="/notion-quotes/kototama/?v=1" loading="lazy"></iframe>
-            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/kototama/?v=1">
-                <button class="copy-button">Copy Embed URL</button>
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <h1>Notion Quote Widgets</h1>
+            <p>A collection of minimalist, elegant quote generators built specifically for embedding in Notion pages.</p>
+            
+            <div class="instructions">
+                <h2>How to use</h2>
+                <ol>
+                    <li>Choose your preferred quote collection from the options on the right</li>
+                    <li>Click "Copy embed link" below the preview</li>
+                    <li>In Notion, paste the link and choose embed block and paste the URL</li>
+                    <li>If necessary, adjust the height of the embed to fit the quote card</li>
+                </ol>
             </div>
         </div>
-        <div class="embed-container">
-            <iframe src="/notion-quotes/atomic-habits/?v=1" loading="lazy"></iframe>
-            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/atomic-habits/?v=1">
-                <button class="copy-button">Copy Embed URL</button>
-            </div>
-        </div>
-        <div class="embed-container">
-            <iframe src="/notion-quotes/stoic/?v=1" loading="lazy"></iframe>
-            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/stoic/?v=1">
-                <button class="copy-button">Copy Embed URL</button>
-            </div>
-        </div>
-        <div class="embed-container">
-            <iframe src="/notion-quotes/tao/?v=1" loading="lazy"></iframe>
-            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/tao/?v=1">
-                <button class="copy-button">Copy Embed URL</button>
-            </div>
-        </div>
-        <div class="embed-container">
-            <iframe src="/notion-quotes/first/?v=1" loading="lazy"></iframe>
-            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/first/?v=1">
-                <button class="copy-button">Copy Embed URL</button>
-            </div>
-        </div>
-        <div class="embed-container">
-            <iframe src="/notion-quotes/koan/?v=1" loading="lazy"></iframe>
-            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/koan/?v=1">
-                <button class="copy-button">Copy Embed URL</button>
-            </div>
-        </div>
-        <div class="embed-container">
-            <iframe src="/notion-quotes/bias/?v=1" loading="lazy"></iframe>
-            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/bias/?v=1">
-                <button class="copy-button">Copy Embed URL</button>
+        
+        <div class="credits">
+            <div class="credits-name">By Daniel Hilse</div>
+            <div class="credits-links">
+                <a href="https://github.com/danhilse">Github</a>
+                <a href="https://twitter.com/danhilse">Follow on X</a>
             </div>
         </div>
     </div>
 
-    <div class="toast" id="toast">URL copied to clipboard!</div>
+    <div class="main-content">
+        <div class="grid">
+            <div class="card">
+                <div class="embed-container" data-type="kototama">
+                    <iframe src="/notion-quotes/kototama/?v=1" loading="lazy"></iframe>
+                </div>
+                <div class="card-footer">
+                    <h2 class="card-title">Japanese Wisdom</h2>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/kototama/?v=1">Copy embed link</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="embed-container" data-type="atomic">
+                    <iframe src="/notion-quotes/atomic/?v=1" loading="lazy"></iframe>
+                </div>
+                <div class="card-footer">
+                    <h2 class="card-title">Atomic Habits</h2>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/atomic/?v=1">Copy embed link</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="embed-container" data-type="stoic">
+                    <iframe src="/notion-quotes/stoic/?v=1" loading="lazy"></iframe>
+                </div>
+                <div class="card-footer">
+                    <h2 class="card-title">Marcus Aurelius</h2>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/stoic/?v=1">Copy embed link</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="embed-container" data-type="tao">
+                    <iframe src="/notion-quotes/tao/?v=1" loading="lazy"></iframe>
+                </div>
+                <div class="card-footer">
+                    <h2 class="card-title">Tao Te Ching</h2>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/tao/?v=1">Copy embed link</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="embed-container" data-type="principles">
+                    <iframe src="/notion-quotes/principles/?v=1" loading="lazy"></iframe>
+                </div>
+                <div class="card-footer">
+                    <h2 class="card-title">First Principles</h2>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/principles/?v=1">Copy embed link</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="embed-container" data-type="science">
+                    <iframe src="/notion-quotes/science/?v=1" loading="lazy"></iframe>
+                </div>
+                <div class="card-footer">
+                    <h2 class="card-title">Scientific Principles</h2>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/science/?v=1">Copy embed link</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="embed-container" data-type="biases">
+                    <iframe src="/notion-quotes/biases/?v=1" loading="lazy"></iframe>
+                </div>
+                <div class="card-footer">
+                    <h2 class="card-title">Cognitive Biases</h2>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/biases/?v=1">Copy embed link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">URL copied to clipboard</div>
 
     <script>
-        document.querySelectorAll('.copy-overlay').forEach(overlay => {
-            overlay.addEventListener('click', async () => {
-                const url = overlay.dataset.url;
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', async () => {
+                const url = button.dataset.url;
                 try {
                     await navigator.clipboard.writeText(url);
                     const toast = document.getElementById('toast');
