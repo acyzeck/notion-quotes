@@ -13,7 +13,7 @@ A collection of minimalist quote widgets for your Notion pages. Each collection 
 
 ## Available Widgets
 
-- Japanese Wisdom ([https://danhilse.github.io/notion-quotes/kototama](https://danhilse.github.io/notion-quotes/kototama))
+- Kototama ([https://danhilse.github.io/notion-quotes/kototama](https://danhilse.github.io/notion-quotes/kototama))
 - Atomic Habits ([https://danhilse.github.io/notion-quotes/atomic-habits](https://danhilse.github.io/notion-quotes/atomic-habits))
 - Marcus Aurelius ([https://danhilse.github.io/notion-quotes/stoic](https://danhilse.github.io/notion-quotes/stoic))
 - Tao Te Ching ([https://danhilse.github.io/notion-quotes/tao](https://danhilse.github.io/notion-quotes/tao))
@@ -33,7 +33,3 @@ A collection of minimalist quote widgets for your Notion pages. Each collection 
 2. Create your feature branch
 3. Make your changes
 4. Push and open a PR
-
-## License
-
-MIT - see LICENSE file
