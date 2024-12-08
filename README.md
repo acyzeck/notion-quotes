@@ -8,7 +8,7 @@ A collection of minimalist quote widgets for your Notion pages. Each collection 
 
 1. Visit [notion-quotes](https://danhilse.github.io/notion-quotes/) 
 2. Click on any widget to copy its embed link
-3. Paste into Notion and select "Create embed"
+3. Paste into Notion and select "Embed" from the formatting options.
 4. Adjust the embed height if needed
 
 ## Available Widgets
@@ -23,36 +23,9 @@ A collection of minimalist quote widgets for your Notion pages. Each collection 
 
 ## Features
 
-- Clean, modern design
 - Random quotes on page load
 - Click to shuffle quotes
 - Works perfectly in Notion embeds
-- One-click embedding
-- Different formats per collection:
-  - Japanese quotes (with readings)
-  - Atomic Habits (with tips)
-  - Meditations (with context)
-  - Tao Te Ching (with Chinese text)
-  - First Principles (with examples)
-  - Zen Koans (with commentary)
-  - Cognitive Biases (with patterns)
-
-## Refreshing Content
-
-Notion caches embeds. To see new updates:
-
-1. Add or update the version in the URL:
-```
-danhilse.github.io/notion-quotes/kototama/?v=1
-danhilse.github.io/notion-quotes/kototama/?v=2
-```
-
-2. Create a new embed with the updated URL
-
-You can also use a date:
-```
-danhilse.github.io/notion-quotes/kototama/?t=20231130
-```
 
 ## Contributing
 
