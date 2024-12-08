@@ -6,13 +6,13 @@
     <title>Notion Quotes Widget</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #fafafa;
             display: flex;
         }
@@ -98,13 +98,16 @@
             margin-left: 280px;
             padding: 40px;
             flex-grow: 1;
-            max-width: 800px;
+            display: flex;
+            justify-content: center;
         }
 
         .grid {
             display: flex;
             flex-direction: column;
             gap: 48px;
+            width: 100%;
+            max-width: 600px;
         }
         
         .card {
@@ -122,13 +125,13 @@
         }
 
         /* Individual aspect ratios */
-        .embed-container[data-type="kototama"] { aspect-ratio: 16/9; }
-        .embed-container[data-type="atomic"] { aspect-ratio: 3/2; }
+        .embed-container[data-type="kototama"] { aspect-ratio: 3/2; }
+        .embed-container[data-type="atomic-habits"] { aspect-ratio: 2/1; }
         .embed-container[data-type="stoic"] { aspect-ratio: 16/10; }
         .embed-container[data-type="tao"] { aspect-ratio: 3/2; }
-        .embed-container[data-type="principles"] { aspect-ratio: 16/9; }
-        .embed-container[data-type="science"] { aspect-ratio: 3/2; }
-        .embed-container[data-type="biases"] { aspect-ratio: 16/9; }
+        .embed-container[data-type="first"] { aspect-ratio: 16/9; }
+        .embed-container[data-type="koan"] { aspect-ratio: 3/2; }
+        .embed-container[data-type="bias"] { aspect-ratio: 2/1; }
         
         iframe {
             width: 100%;
@@ -154,7 +157,7 @@
             background: none;
             border: none;
             padding: 6px 12px;
-            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 0.8rem;
             color: #666;
             cursor: pointer;
@@ -215,71 +218,71 @@
         <div class="grid">
             <div class="card">
                 <div class="embed-container" data-type="kototama">
-                    <iframe src="/notion-quotes/kototama/?v=1" loading="lazy"></iframe>
+                    <iframe src="kototama/" loading="lazy"></iframe>
                 </div>
                 <div class="card-footer">
                     <h2 class="card-title">Japanese Wisdom</h2>
-                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/kototama/?v=1">Copy embed link</button>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/kototama">Copy embed link</button>
                 </div>
             </div>
 
             <div class="card">
-                <div class="embed-container" data-type="atomic">
-                    <iframe src="/notion-quotes/atomic/?v=1" loading="lazy"></iframe>
+                <div class="embed-container" data-type="atomic-habits">
+                    <iframe src="atomic-habits/" loading="lazy"></iframe>
                 </div>
                 <div class="card-footer">
                     <h2 class="card-title">Atomic Habits</h2>
-                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/atomic/?v=1">Copy embed link</button>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/atomic-habits">Copy embed link</button>
                 </div>
             </div>
 
             <div class="card">
                 <div class="embed-container" data-type="stoic">
-                    <iframe src="/notion-quotes/stoic/?v=1" loading="lazy"></iframe>
+                    <iframe src="stoic/" loading="lazy"></iframe>
                 </div>
                 <div class="card-footer">
                     <h2 class="card-title">Marcus Aurelius</h2>
-                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/stoic/?v=1">Copy embed link</button>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/stoic">Copy embed link</button>
                 </div>
             </div>
 
             <div class="card">
                 <div class="embed-container" data-type="tao">
-                    <iframe src="/notion-quotes/tao/?v=1" loading="lazy"></iframe>
+                    <iframe src="tao/" loading="lazy"></iframe>
                 </div>
                 <div class="card-footer">
                     <h2 class="card-title">Tao Te Ching</h2>
-                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/tao/?v=1">Copy embed link</button>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/tao">Copy embed link</button>
                 </div>
             </div>
 
             <div class="card">
-                <div class="embed-container" data-type="principles">
-                    <iframe src="/notion-quotes/principles/?v=1" loading="lazy"></iframe>
+                <div class="embed-container" data-type="first">
+                    <iframe src="first/" loading="lazy"></iframe>
                 </div>
                 <div class="card-footer">
                     <h2 class="card-title">First Principles</h2>
-                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/principles/?v=1">Copy embed link</button>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/first">Copy embed link</button>
                 </div>
             </div>
 
             <div class="card">
-                <div class="embed-container" data-type="science">
-                    <iframe src="/notion-quotes/science/?v=1" loading="lazy"></iframe>
+                <div class="embed-container" data-type="koan">
+                    <iframe src="koan/" loading="lazy"></iframe>
                 </div>
                 <div class="card-footer">
-                    <h2 class="card-title">Scientific Principles</h2>
-                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/science/?v=1">Copy embed link</button>
+                    <h2 class="card-title">Zen Koans</h2>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/koan">Copy embed link</button>
                 </div>
             </div>
 
             <div class="card">
-                <div class="embed-container" data-type="biases">
-                    <iframe src="/notion-quotes/biases/?v=1" loading="lazy"></iframe>
+                <div class="embed-container" data-type="bias">
+                    <iframe src="bias/" loading="lazy"></iframe>
                 </div>
                 <div class="card-footer">
                     <h2 class="card-title">Cognitive Biases</h2>
-                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/biases/?v=1">Copy embed link</button>
+                    <button class="copy-button" data-url="https://danhilse.github.io/notion-quotes/bias">Copy embed link</button>
                 </div>
             </div>
         </div>
