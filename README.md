@@ -7,12 +7,12 @@ A collection of minimalist, elegant quote generators built specifically for embe
 ## Live Demos
 
 - Japanese Wisdom: `https://danhilse.github.io/notion-quotes/kototama/`
-- Atomic Habits: `https://danhilse.github.io/notion-quotes/atomic/`
+- Atomic Habits: `https://danhilse.github.io/notion-quotes/atomic-habits/`
 - Marcus Aurelius: `https://danhilse.github.io/notion-quotes/stoic/`
 - Tao Te Ching: `https://danhilse.github.io/notion-quotes/tao/`
-- First Principles: `https://danhilse.github.io/notion-quotes/principles/`
-- Scientific Principles: `https://danhilse.github.io/notion-quotes/science/`
-- Cognitive Biases: `https://danhilse.github.io/notion-quotes/biases/`
+- First Principles: `https://danhilse.github.io/notion-quotes/first/`
+- Zen Koans: `https://danhilse.github.io/notion-quotes/koan/`
+- Cognitive Biases: `https://danhilse.github.io/notion-quotes/bias/`
 
 ## Features
 
@@ -21,39 +21,31 @@ A collection of minimalist, elegant quote generators built specifically for embe
 - Randomized quotes on page load
 - Click-to-shuffle functionality
 - Fully responsive and embedded-friendly
+- One-click copy for Notion embedding
 - Different styles for different content types:
   - Japanese quotes with phonetic readings
   - Atomic Habits with implementation tips
   - Meditations with reflections and context
   - Tao Te Ching with original Chinese and pinyin
   - First Principles with examples and exercises
-  - Scientific Principles with daily life connections
-  - Cognitive Biases with recognition patterns and strategies
+  - Zen Koans with commentaries
+  - Cognitive Biases with recognition patterns
 
 ## Usage in Notion
 
-1. Choose your desired quote collection:
-```
-/kototama/    - Japanese wisdom and concepts
-/atomic/      - Atomic Habits principles and tips
-/stoic/       - Marcus Aurelius meditations
-/tao/         - Tao Te Ching wisdom with Chinese text
-/principles/  - First Principles thinking methods
-/science/     - Scientific Principles in daily life
-/biases/      - Common Cognitive Biases
-```
-
+1. Visit our [homepage](https://danhilse.github.io/notion-quotes/) and click on any quote collection to copy its embed URL
 2. Create an embed block in your Notion page
+3. Paste the copied URL
 
-3. Paste the URL with a version parameter to prevent caching:
+Or manually choose from these collections:
 ```
-https://danhilse.github.io/notion-quotes/kototama/?v=1
-https://danhilse.github.io/notion-quotes/atomic/?v=1
-https://danhilse.github.io/notion-quotes/stoic/?v=1
-https://danhilse.github.io/notion-quotes/tao/?v=1
-https://danhilse.github.io/notion-quotes/principles/?v=1
-https://danhilse.github.io/notion-quotes/science/?v=1
-https://danhilse.github.io/notion-quotes/biases/?v=1
+/kototama/      - Japanese wisdom and concepts
+/atomic-habits/  - Atomic Habits principles and tips
+/stoic/         - Marcus Aurelius meditations
+/tao/           - Tao Te Ching wisdom with Chinese text
+/first/         - First Principles thinking methods
+/koan/          - Zen Koans and commentaries
+/bias/          - Common Cognitive Biases
 ```
 
 ### Important: Updating and Cache Busting

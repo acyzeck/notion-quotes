@@ -193,29 +193,26 @@
             currentCardIndex = newIndex;
             const card = cards[currentCardIndex];
             
-            const principle = document.querySelector('.principle');
-            const definition = document.querySelector('.definition');
-            const example = document.querySelector('.example-text');
-            const exercise = document.querySelector('.exercise');
+            // Select all animated elements
+            const elements = {
+                principle: document.querySelector('.principle'),
+                definition: document.querySelector('.definition'),
+                exampleBox: document.querySelector('.example-box'),
+                exercise: document.querySelector('.exercise')
+            };
             
-            // Remove elements
-            principle.textContent = '';
-            definition.textContent = '';
-            example.textContent = '';
-            exercise.textContent = '';
-            
-            // Reset animations
-            [principle, definition, example, exercise].forEach(el => {
+            // Reset animations for all elements
+            Object.values(elements).forEach(el => {
                 el.style.animation = 'none';
                 el.offsetHeight; // Trigger reflow
                 el.style.animation = null;
             });
             
-            // Set new content
-            principle.textContent = card.principle;
-            definition.textContent = card.definition;
-            example.textContent = card.example;
-            exercise.textContent = card.exercise;
+            // Update content
+            elements.principle.textContent = card.principle;
+            elements.definition.textContent = card.definition;
+            document.querySelector('.example-text').textContent = card.example;
+            elements.exercise.textContent = card.exercise;
         }
 
         // Set initial card

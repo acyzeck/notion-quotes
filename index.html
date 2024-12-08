@@ -10,96 +10,173 @@
     <style>
         body {
             margin: 0;
-            padding: 0;
+            padding: 20px;
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
             background: #fafafa;
-            color: #333;
         }
         
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
         }
-        
-        h1 {
+
+        .header h1 {
             font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
             color: #2c2c2c;
+            margin-bottom: 1rem;
         }
-        
-        .collections-grid {
+
+        .header p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
-        .collection-card {
+        .embed-container {
+            position: relative;
             background: white;
             border-radius: 12px;
-            padding: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            border: 1px solid #eee;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            aspect-ratio: 4/3;
+        }
+        
+        .embed-container:hover .copy-overlay {
+            opacity: 1;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .copy-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
         }
-        
-        .collection-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+        .copy-button {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
-        
-        .collection-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin: 0;
-            color: #2c2c2c;
+
+        .copy-button:hover {
+            transform: scale(1.05);
         }
-        
-        .collection-description {
-            font-size: 0.95rem;
-            color: #666;
-            line-height: 1.5;
-            margin: 0;
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
-        
-        .collection-meta {
-            font-size: 0.85rem;
-            color: #888;
-            margin-top: auto;
-            padding-top: 1rem;
+
+        .toast.show {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Daily Wisdom</h1>
-        
-        <div class="collections-grid">
-            <a href="/notion-quotes/kototama/" class="collection-card">
-                <h2 class="collection-title">Kototama 言霊</h2>
-                <p class="collection-description">Ancient Japanese wisdom and proverbs that provide timeless insights into life, creativity, and personal growth.</p>
-                <div class="collection-meta">15 quotes • Japanese wisdom</div>
-            </a>
-            
-            <a href="/notion-quotes/atomic-habits/" class="collection-card">
-                <h2 class="collection-title">Atomic Habits</h2>
-                <p class="collection-description">Key insights from James Clear's revolutionary approach to building good habits and breaking bad ones.</p>
-                <div class="collection-meta">00 quotes • Personal development</div>
-            </a>
-            
-            <a href="/notion-quotes/stoic/" class="collection-card">
-                <h2 class="collection-title">Stoic Reflections</h2>
-                <p class="collection-description">Timeless wisdom from Marcus Aurelius, Seneca, and Epictetus on resilience, peace, and living well.</p>
-                <div class="collection-meta">18 quotes • Philosophy</div>
-            </a>
+    <div class="header">
+        <h1>Daily Wisdom Collections</h1>
+        <p>Click any quote generator to copy its Notion embed URL. Then paste directly into your Notion page.</p>
+    </div>
+
+    <div class="grid">
+        <div class="embed-container">
+            <iframe src="/notion-quotes/kototama/?v=1" loading="lazy"></iframe>
+            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/kototama/?v=1">
+                <button class="copy-button">Copy Embed URL</button>
+            </div>
+        </div>
+        <div class="embed-container">
+            <iframe src="/notion-quotes/atomic-habits/?v=1" loading="lazy"></iframe>
+            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/atomic-habits/?v=1">
+                <button class="copy-button">Copy Embed URL</button>
+            </div>
+        </div>
+        <div class="embed-container">
+            <iframe src="/notion-quotes/stoic/?v=1" loading="lazy"></iframe>
+            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/stoic/?v=1">
+                <button class="copy-button">Copy Embed URL</button>
+            </div>
+        </div>
+        <div class="embed-container">
+            <iframe src="/notion-quotes/tao/?v=1" loading="lazy"></iframe>
+            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/tao/?v=1">
+                <button class="copy-button">Copy Embed URL</button>
+            </div>
+        </div>
+        <div class="embed-container">
+            <iframe src="/notion-quotes/first/?v=1" loading="lazy"></iframe>
+            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/first/?v=1">
+                <button class="copy-button">Copy Embed URL</button>
+            </div>
+        </div>
+        <div class="embed-container">
+            <iframe src="/notion-quotes/koan/?v=1" loading="lazy"></iframe>
+            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/koan/?v=1">
+                <button class="copy-button">Copy Embed URL</button>
+            </div>
+        </div>
+        <div class="embed-container">
+            <iframe src="/notion-quotes/bias/?v=1" loading="lazy"></iframe>
+            <div class="copy-overlay" data-url="https://danhilse.github.io/notion-quotes/bias/?v=1">
+                <button class="copy-button">Copy Embed URL</button>
+            </div>
         </div>
     </div>
+
+    <div class="toast" id="toast">URL copied to clipboard!</div>
+
+    <script>
+        document.querySelectorAll('.copy-overlay').forEach(overlay => {
+            overlay.addEventListener('click', async () => {
+                const url = overlay.dataset.url;
+                try {
+                    await navigator.clipboard.writeText(url);
+                    const toast = document.getElementById('toast');
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 2000);
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
