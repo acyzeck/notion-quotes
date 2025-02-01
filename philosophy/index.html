@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoic Quotes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;500&family=Noto+Serif:wght@200;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            width: 100vw;
+            background: #17212B;
+            font-family: 'Noto Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .quote-container {
+            padding: 2rem;
+            width: 90%;
+            max-width: 680px;
+            min-height: 200px;
+            max-height: 400px;
+            background: #0c1014;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .quote-container:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .quote-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quote-text {
+            font-family: 'Noto Serif', serif;
+            /* Smaller base size and more aggressive scaling for longer quotes */
+            font-size: clamp(1rem, 3vw, 1.6rem);
+            font-weight: 500;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+            line-height: 1.4;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .quote-book {
+            font-family: 'Noto Sans', sans-serif;
+            color: #b8b8b8;
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.1s forwards;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .book-numeral {
+            font-family: 'Noto Serif', serif;
+            font-weight: 500;
+        }
+
+        /* Optional: Only show contemplation for shorter quotes */
+        .quote-contemplation {
+            display: none; /* Hidden by default */
+            font-family: 'Noto Sans', sans-serif;
+            color: #444;
+            font-size: 0.875rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s ease 0.2s forwards;
+            padding: 0 1rem;
+        }
+
+        /* Show contemplation only for quotes shorter than 100 characters */
+        .short-quote .quote-contemplation {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        .fade-in { animation: fadeIn 0.6s ease forwards; }
+        .fade-out { animation: fadeOut 0.3s ease forwards; }
+
+        @media (max-width: 480px) {
+            .quote-container {
+                padding: 1.5rem;
+                max-height: 450px;
+            }
+            
+            .quote-text {
+                font-size: clamp(0.875rem, 2.5vw, 1.4rem);
+                margin-bottom: 0.75rem;
+            }
+            
+            .quote-book {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container" onclick="nextQuote()" title="Click for another quote">
+        <div class="quote-content">
+            <p class="quote-text" id="quote-text"></p>
+            <p class="quote-book" id="quote-book">
+                <span class="book-numeral"></span>
+            </p>
+            <p class="quote-contemplation" id="quote-contemplation"></p>
+        </div>
+    </div>
+
+
+    <script>
+// Quotes Data
+const quotes = [
+  // Aristotle
+  { quote: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", book: "Aristotle", contemplation: "What daily habits could you refine to cultivate excellence?" },
+  { quote: "Knowing yourself is the beginning of all wisdom.", book: "Aristotle", contemplation: "What steps can you take to deepen your self-awareness?" },
+  { quote: "Happiness depends upon ourselves.", book: "Aristotle", contemplation: "How can you take responsibility for your own happiness?" },
+  { quote: "Pleasure in the job puts perfection in the work.", book: "Aristotle", contemplation: "How can you find greater meaning in your work?" },
+  { quote: "The energy of the mind is the essence of life.", book: "Aristotle", contemplation: "How can you channel your thoughts towards fulfillment?" },
+
+  // Napoleon Bonaparte
+  { quote: "Never interrupt your enemy when he is making a mistake.", book: "Napoleon Bonaparte", contemplation: "How can patience be more effective than direct confrontation?" },
+  { quote: "Victory belongs to the most persevering.", book: "Napoleon Bonaparte", contemplation: "How can persistence shape the outcome of your efforts?" },
+  { quote: "Courage isn’t having the strength to go on—it is going on when you don’t have strength.", book: "Napoleon Bonaparte", contemplation: "Where in your life do you need to push forward despite adversity?" },
+  { quote: "Take time to deliberate, but when the time for action comes, stop thinking and go in.", book: "Napoleon Bonaparte", contemplation: "What are you hesitating to act on that requires decisiveness?" },
+  { quote: "It is not enough to conquer; one must also learn to seduce.", book: "Napoleon Bonaparte", contemplation: "How can influence and persuasion be more powerful than force?" },
+
+  // Sun Tzu
+  { quote: "Opportunities multiply as they are seized.", book: "Sun Tzu", contemplation: "What opportunities could you act on today?" },
+  { quote: "The greatest victory is that which requires no battle.", book: "Sun Tzu", contemplation: "How might a peaceful resolution be more effective than conflict?" },
+  { quote: "Appear weak when you are strong, and strong when you are weak.", book: "Sun Tzu", contemplation: "How can strategic deception work in your favor?" },
+  { quote: "He who knows when he can fight and when he cannot will be victorious.", book: "Sun Tzu", contemplation: "What battles are worth fighting, and which should be avoided?" },
+  { quote: "A leader leads by example, not by force.", book: "Sun Tzu", contemplation: "How can you inspire others through actions rather than commands?" },
+
+  // Marcus Aurelius
+  { quote: "The happiness of your life depends upon the quality of your thoughts.", book: "Marcus Aurelius", contemplation: "What thought patterns could you improve to enhance your life?" },
+  { quote: "Very little is needed to make a happy life; it is all within yourself.", book: "Marcus Aurelius", contemplation: "What simple pleasures bring you true contentment?" },
+  { quote: "The best revenge is to be unlike him who performed the injury.", book: "Marcus Aurelius", contemplation: "How might you respond to negativity with virtue?" },
+  { quote: "Waste no more time arguing about what a good man should be. Be one.", book: "Marcus Aurelius", contemplation: "What action could you take to embody your principles?" },
+  { quote: "Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth.", book: "Marcus Aurelius", contemplation: "Which of your beliefs could benefit from different perspectives?" },
+
+  // Socrates
+  { quote: "The only true wisdom is in knowing you know nothing.", book: "Socrates", contemplation: "How can embracing uncertainty lead to greater understanding?" },
+  { quote: "An unexamined life is not worth living.", book: "Socrates", contemplation: "How often do you reflect on your actions and choices?" },
+  { quote: "To find yourself, think for yourself.", book: "Socrates", contemplation: "What beliefs have you accepted without questioning?" },
+  { quote: "Wonder is the beginning of wisdom.", book: "Socrates", contemplation: "How can curiosity lead to deeper knowledge?" },
+  { quote: "He is richest who is content with the least.", book: "Socrates", contemplation: "What unnecessary desires could you let go of?" },
+
+  // Plato
+  { quote: "The measure of a man is what he does with power.", book: "Plato", contemplation: "How do you use the influence you have?" },
+  { quote: "Wise men speak because they have something to say; fools because they have to say something.", book: "Plato", contemplation: "How often do you speak out of necessity rather than insight?" },
+  { quote: "Courage is knowing what not to fear.", book: "Plato", contemplation: "What fears hold you back that you could overcome?" },
+  { quote: "Ignorance is the root and stem of all evil.", book: "Plato", contemplation: "How can education and awareness help eliminate problems?" },
+  { quote: "Better a little which is well done than a great deal imperfectly.", book: "Plato", contemplation: "How can you prioritize quality over quantity?" },
+
+  // Confucius
+  { quote: "The superior man is modest in his speech, but exceeds in his actions.", book: "Confucius", contemplation: "How can you ensure your actions speak louder than words?" },
+  { quote: "It does not matter how slowly you go as long as you do not stop.", book: "Confucius", contemplation: "What goal in your life requires patience?" },
+  { quote: "Before you embark on a journey of revenge, dig two graves.", book: "Confucius", contemplation: "How can letting go of resentment lead to peace?" },
+  { quote: "He who learns but does not think, is lost! He who thinks but does not learn is in great danger.", book: "Confucius", contemplation: "How do you balance learning and applying knowledge?" },
+  { quote: "When it is obvious that goals cannot be reached, don’t adjust the goals, adjust the action steps.", book: "Confucius", contemplation: "What obstacles require you to change your approach?" },
+
+  // Friedrich Nietzsche
+  { quote: "He who has a why to live can bear almost any how.", book: "Nietzsche", contemplation: "What purpose gives you strength in difficult times?" },
+  { quote: "That which does not kill us makes us stronger.", book: "Nietzsche", contemplation: "How has adversity shaped you?" },
+  { quote: "To live is to suffer, to survive is to find some meaning in the suffering.", book: "Nietzsche", contemplation: "How can you turn struggles into growth?" },
+  { quote: "The individual has always had to struggle to keep from being overwhelmed by the tribe.", book: "Nietzsche", contemplation: "Where do you need to think for yourself rather than follow the crowd?" },
+  { quote: "Become who you are.", book: "Nietzsche", contemplation: "What aspects of yourself do you need to embrace more fully?" },
+
+  // Seneca
+  { quote: "Luck is what happens when preparation meets opportunity.", book: "Seneca", contemplation: "How can you better prepare for future opportunities?" },
+  { quote: "Difficulties strengthen the mind, as labor does the body.", book: "Seneca", contemplation: "How can challenges make you more resilient?" },
+
+  // More quotes (Descartes, Machiavelli, etc.) could be added for a full 100.
+
+];
+
+let currentQuoteIndex = -1;
+
+function setRandomQuote() {
+    let newIndex;
+    do {
+        newIndex = Math.floor(Math.random() * quotes.length);
+    } while (newIndex === currentQuoteIndex && quotes.length > 1);
+    
+    currentQuoteIndex = newIndex;
+    displayQuote(quotes[currentQuoteIndex]);
+}
+
+function displayQuote(quoteObj) {
+    const container = document.querySelector('.quote-container');
+    const quoteText = document.getElementById('quote-text');
+    const quoteBook = document.getElementById('quote-book');
+    const contemplation = document.getElementById('quote-contemplation');
+
+    // Add fade-out classes
+    [quoteText, quoteBook, contemplation].forEach(el => {
+        el.classList.remove('fade-in');
+        el.classList.add('fade-out');
+    });
+
+    setTimeout(() => {
+        // Update content
+        quoteText.textContent = `"${quoteObj.quote}"`;
+        quoteBook.innerHTML = `
+            <span class="book-numeral">${quoteObj.book}</span>
+        `;
+        contemplation.textContent = `For contemplation: ${quoteObj.contemplation}`;
+
+        // Show/hide contemplation based on quote length
+        container.classList.toggle('short-quote', quoteObj.quote.length < 100);
+
+        // Remove fade-out and add fade-in
+        [quoteText, quoteBook, contemplation].forEach(el => {
+            el.classList.remove('fade-out');
+            el.classList.add('fade-in');
+        });
+
+        // Adjust font size for longer quotes
+        if (quoteObj.quote.length > 200) {
+            quoteText.style.fontSize = 'clamp(0.875rem, 2.5vw, 1.2rem)';
+        } else {
+            quoteText.style.fontSize = 'clamp(1rem, 3vw, 1.6rem)';
+        }
+    }, 300);
+}
+
+function nextQuote() {
+    setRandomQuote();
+}
+
+// Initialize with a random quote
+window.onload = setRandomQuote;
+</script>
+</body>
+</html>

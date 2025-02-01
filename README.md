@@ -16,6 +16,7 @@ A collection of minimalist quote widgets for your Notion pages. Each collection 
 - Kototama ([https://danhilse.github.io/notion-quotes/kototama](https://danhilse.github.io/notion-quotes/kototama))
 - Atomic Habits ([https://danhilse.github.io/notion-quotes/atomic-habits](https://danhilse.github.io/notion-quotes/atomic-habits))
 - Marcus Aurelius ([https://danhilse.github.io/notion-quotes/stoic](https://danhilse.github.io/notion-quotes/stoic))
+- Philosophy ([https://danhilse.github.io/notion-quotes/stoic](https://danhilse.github.io/notion-quotes/philosophy))
 - Tao Te Ching ([https://danhilse.github.io/notion-quotes/tao](https://danhilse.github.io/notion-quotes/tao))
 - First Principles ([https://danhilse.github.io/notion-quotes/first](https://danhilse.github.io/notion-quotes/first))
 - Zen Koans ([https://danhilse.github.io/notion-quotes/koan](https://danhilse.github.io/notion-quotes/koan))
